@@ -1,7 +1,6 @@
 """
 https://github.com/Tanchyyk/Puzzle.git
 """
-import doctest
 
 
 def validate_board(board: list) -> bool:
@@ -24,7 +23,7 @@ def validate_row(board: list) -> bool:
     """
     for row in board:
         for element in row:
-            if row.count(element) > 1:
+            if element.isnumeric() and row.count(element) > 1:
                 return False
             return True
 
@@ -36,7 +35,7 @@ def validate_column(board: list) -> bool:
     """
     for index in range(len(board[0])):
         for row in board:
-            if row.count(row[index]) > 1 and row[index].isnumeric():
+            if row[index].isnumeric() and row.count(row[index]) > 1:
                 return False
     return True
 
@@ -65,9 +64,11 @@ board = [
  "* 4 1****",
  "     9 5 ",
  " 6  83  *",
- "3   1  **",
+ "3   7  **",
  "  8  2***",
  "  2  ****"
 ]
-# print(validate_board(board))
-print(doctest.testmod())
+print(validate_board(board))
+print(validate_color(board))
+print(validate_row(board))
+print(validate_column(board))
