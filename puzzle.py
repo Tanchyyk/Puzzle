@@ -52,17 +52,17 @@ def validate_color(board: list) -> bool:
         for element in board[-i]:
             if element.isnumeric():
                 list_of_nums.append(int(element))
-        if len(set(list_of_nums)) != len(list_of_nums):
+        if len(set(list_of_nums)) < len(list_of_nums):
             return False
     return True
 
 
 board = [
- "**** ****",
- "***1 ****",
- "**  3****",
- "* 4 1****",
- "     9 5 ",
+ "****3****",
+ "***12****",
+ "**321****",
+ "*1234****",
+ "    69857",
  " 6  83  *",
  "3   7  **",
  "  8  2***",
