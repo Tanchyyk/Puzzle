@@ -28,43 +28,59 @@ def validate_row(board: list) -> bool:
             return True
 
 
+def get_column(board: list) -> list:
+    columns = []
+
+    for i in range(len(board[0])):
+        column = ""
+        for row in board:
+            column += row[i]
+        columns.append(column)
+    return columns
+
+
 def validate_column(board: list) -> bool:
     """
     Function check if columns of a board are built correctly.
     Return True if it is, False - if it is not.
     """
-    for index in range(len(board[0])):
-        for row in board:
-            if row[index].isnumeric() and row.count(row[index]) > 1:
-                return False
-    return True
+    columns = get_column(board)
+
+    if validate_row(columns):
+        return True
+    return False
+
+
+def get_color(board: list) -> list:
+    one_color = []
+    columns = get_column(board)
+    for i in range(len(board)):
+        line = ""
+        line += board[-i]
+        line += columns[i]
+        one_color.append(line)
+
+    return one_color
 
 
 def validate_color(board: list) -> bool:
     """
     Function check if all blocks in one color have not the same numbers inside.
     """
-    for i in range(1, len(board[0]) + 1):
-        list_of_nums = []
-        for row in board:
-            if row[i - 1].isnumeric():
-                list_of_nums.append(int(row[i - 1]))
-        for element in board[-i]:
-            if element.isnumeric():
-                list_of_nums.append(int(element))
-        if len(set(list_of_nums)) < len(list_of_nums):
-            return False
-    return True
+    one_color = get_color(board)
+    if validate_row(one_color):
+        return True
+    return False
 
 
 board = [
- "****3****",
- "***12****",
- "**321****",
- "*1234****",
- "    69857",
+ "**** ****",
+ "***1 ****",
+ "**  3****",
+ "* 4 1****",
+ "     9 5 ",
  " 6  83  *",
- "3   7  **",
+ "3   9  **",
  "  8  2***",
  "  2  ****"
 ]
